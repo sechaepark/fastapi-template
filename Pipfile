@@ -1,0 +1,22 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+pytest-aiohttp = "*"
+testcontainers = "*"
+
+[packages]
+jsons = "==1.6.1"
+ujson = "==5.2.0"
+requests = "==2.27.1"
+fastapi = "==0.75.2"
+uvicorn = "==0.17.6"
+gunicorn = "==20.1.0"
+pymysql = "==1.0.2"
+python-multipart = "==0.0.5"
+
+[requires]
+python_version = "3.9"
