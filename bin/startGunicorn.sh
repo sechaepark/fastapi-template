@@ -19,9 +19,17 @@ help_msg() {
   exit 1
 }
 
+if [ $# -ne 1 ]; then
+  help_msg
+fi
+
 if [ -f $PID_FILE ]; then
   PID=$(cat $PID_FILE)
 fi
+
+echo "--------------------------------------------------------------------------------"
+echo "os environment variable (FASTAPI_TEMPLATE_ENV) : $FASTAPI_TEMPLATE_ENV"
+echo "--------------------------------------------------------------------------------"
 
 start_server() {
   if [ -f $PID_FILE ]; then
@@ -29,18 +37,13 @@ start_server() {
     echo "$(date) : $SERVER_LOG_TAG already exist process pid[$PID]" >>$LOG_FILE
   else
     cd $APP_PATH/app
-    if [ "$FASTAPI_TEMPLATE_ENV" == "local" ]; then
-      # uvicorn main:app --host 0.0.0.0 --port 8080 --reload
-      pipenv run uvicorn main:app --host 0.0.0.0 --port 8080 --reload
-    else
-      # gunicorn --worker-class uvicorn.workers.UvicornWorker --workers 20 --bind 0.0.0.0:8080 --pid $PID_FILE --daemon --access-logfile $ACCESS_LOG_FILE --log-file $LOG_FILE main:app
-      # gunicorn -c $CONFIG_FILE --pid $PID_FILE --daemon --access-logfile $ACCESS_LOG_FILE --log-file $LOG_FILE main:app
-      pipenv run gunicorn -c $CONFIG_FILE --pid $PID_FILE --daemon --access-logfile $ACCESS_LOG_FILE --log-file $LOG_FILE main:app
-      echo "Started"
-      sleep 1
-      echo "Started process pid[$(cat $PID_FILE)]"
-      echo "$(date) : $SERVER_LOG_TAG started process pid[$(cat $PID_FILE)]" >>$LOG_FILE
-    fi
+    # gunicorn --worker-class uvicorn.workers.UvicornWorker --workers 20 --bind 0.0.0.0:8080 --pid $PID_FILE --daemon --access-logfile $ACCESS_LOG_FILE --log-file $LOG_FILE main:app
+    # gunicorn -c $CONFIG_FILE --pid $PID_FILE --daemon --access-logfile $ACCESS_LOG_FILE --log-file $LOG_FILE main:app
+    pipenv run gunicorn -c $CONFIG_FILE --pid $PID_FILE --daemon --access-logfile $ACCESS_LOG_FILE --log-file $LOG_FILE main:app
+    echo "Started"
+    sleep 1
+    echo "Started process pid[$(cat $PID_FILE)]"
+    echo "$(date) : $SERVER_LOG_TAG started process pid[$(cat $PID_FILE)]" >>$LOG_FILE
   fi
 }
 
