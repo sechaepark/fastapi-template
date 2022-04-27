@@ -1,6 +1,6 @@
 # python-api template
 
-Python Source for REST API
+REST API Template Source using FastAPI 
 ***
 
 # Installation and Getting Started
@@ -19,8 +19,8 @@ Python Source for REST API
     * `python main.py`
 * Execute in Bin Path
     * `cd bin`
-    * `./startServer.sh [start|stop|restart] job_name`
-        * `ex) ./startServer.sh restart cron_jobs`
+    * `./startServer.sh [start|stop|restart]`
+        * `ex) ./startServer.sh restart`
 * Open URL in web browser
     * http://localhost:8080/docs
     * http://localhost:8080/redoc
@@ -32,6 +32,9 @@ Python Source for REST API
 ##### Reference
 
 * `pipenv` https://pipenv.kennethreitz.org
+* `FastAPI` https://fastapi.tiangolo.com
+* `Uvicorn` https://www.uvicorn.org
+* `Gunicorn` https://gunicorn.org
 
 
  
