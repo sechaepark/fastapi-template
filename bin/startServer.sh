@@ -15,7 +15,7 @@ mkdir -p $LOG_PATH
 
 help_msg() {
   echo "usage: $0 [start|stop|restart]"
-  echo "ex: $0 start"
+  echo "ex: $0 restart"
   exit 1
 }
 
